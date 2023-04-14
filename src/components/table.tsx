@@ -1,25 +1,30 @@
 import React from "react"
 import { Produit } from "../App";
+import Table from 'react-bootstrap/Table';
 
-export function Table(props: { produits: Produit[] }) {
+export function Tableau(props: { produits: Produit[] }) {
     console.log(props);
     const listProduits = props.produits.map(produit => {
         return (
-            <li className="list-group-item d-flex justify-content-between align-items-start">
-                <div className="ms-2 me-auto">
-                    <div className="fw-bold">{produit.name}</div>
-                    {produit.price}€
-                </div>
-                <span className="badge bg-primary rounded-pill">{produit.quantity}</span>
-            </li>
+            <tr key={produit.id}>
+                <td>{produit.name}</td>
+                <td>{produit.price}€</td>
+                <td>{produit.quantity}</td>
+            </tr>
         )
     })
     return (
-        <div>
-            <ol className="list-group list-group-numbered">
+        <Table striped bordered hover>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
                 {listProduits}
-            </ol>
-
-        </div>
+            </tbody>
+        </Table>
     )
 };

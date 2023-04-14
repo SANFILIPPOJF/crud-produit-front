@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+// import './App.css';
 import { Titre } from './components/titre';
-import { Table } from './components/table';
+import { Tableau } from './components/table';
 import { BtnAdd } from './components/btnAdd';
+import { AppService } from './app.service';
 
 export interface Produit {
   id: number;
@@ -17,20 +18,21 @@ function App() {
 
   useEffect(() => {
     fetch('http://localhost:8000/produits')
-    .then(data => {
-      return data.json()})
-    .then(produits => {
-      console.log(produits);
-      setListProduit(produits.data);
-    })
-    .catch(error => console.error(error));
-  },[])
+      .then(data => {
+        return data.json()
+      })
+      .then(produits => {
+        console.log(produits);
+        setListProduit(produits.data);
+      })
+      .catch(error => console.error(error));
+  }, [])
   return (
     <div className="App">
       <Titre></Titre>
       <header className="App-header">
-      {page === "accueil" && <BtnAdd></BtnAdd>}
-      <Table produits={listProduit}></Table>
+        {page === "accueil" && <BtnAdd></BtnAdd>}
+        <Tableau produits={listProduit}></Tableau>
       </header>
     </div>
   );
